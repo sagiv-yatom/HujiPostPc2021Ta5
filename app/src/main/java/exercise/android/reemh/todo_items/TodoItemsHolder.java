@@ -1,13 +1,14 @@
 package exercise.android.reemh.todo_items;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.ArrayList;
 
 
 // TODO: feel free to add/change/remove methods as you want
-public interface TodoItemsHolder {
+public interface TodoItemsHolder extends Serializable {
 
   /** Get a copy of the current items list */
-  List<TodoItem> getCurrentItems();
+  ArrayList<TodoItem> getCurrentItems();
 
   /**
    * Creates a new TodoItem and adds it to the list, with the @param description and status=IN-PROGRESS
@@ -23,4 +24,10 @@ public interface TodoItemsHolder {
 
   /** delete the @param item */
   void deleteItem(TodoItem item);
+
+  /** set the holder with @param items */
+  void setAllItems(ArrayList<TodoItem> items);
+
+  /** return the first item with the @param description */
+  TodoItem getItemByDesc(String description);
 }
