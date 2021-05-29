@@ -1,40 +1,35 @@
 package exercise.android.reemh.todo_items;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-  public TodoItemsHolder holder = null;
+  public TodoItemsDataBase dataBase = null;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    if (savedInstanceState == null || !savedInstanceState.containsKey("holder")) {
-      holder = new TodoItemsHolderImpl();
+    if (savedInstanceState == null || !savedInstanceState.containsKey("dataBase")) {
+      dataBase = TodoItemsApplication.getInstance().getDataBase();
     }
     else {
-      holder = (TodoItemsHolderImpl) savedInstanceState.getSerializable("holder");
+      dataBase = (TodoItemsDataBaseImpl) savedInstanceState.getSerializable("dataBase");
     }
 
     RecyclerView recyclerView = findViewById(R.id.recyclerTodoItemsList);
@@ -44,15 +39,23 @@ public class MainActivity extends AppCompatActivity {
     LinearLayoutManager layout = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
     recyclerView.setLayoutManager(layout);
 
-    TodoItemsAdapter adapter = new TodoItemsAdapter(this, (TodoItemsHolderImpl) holder);
+    TodoItemsAdapter adapter = new TodoItemsAdapter(this, (TodoItemsDataBaseImpl) dataBase);
     recyclerView.setAdapter(adapter);
+
+    // for every time todoItems has changed, the method onChanged will be running
+    dataBase.getItemsLiveData().observe(this, new Observer<List<TodoItem>>() {
+      @Override
+      public void onChanged(List<TodoItem> todoItems) {
+        adapter.notifyDataSetChanged();
+      }
+    });
 
     buttonCreateTodoItem.setOnClickListener(v -> {
       String itemText = editTextInsertTask.getText().toString();
 
       // check if editTextInsertTask is not empty
       if (!itemText.matches("")) {
-        holder.addNewInProgressItem(itemText);
+        dataBase.addNewInProgressItem(itemText);
         adapter.notifyDataSetChanged();
         editTextInsertTask.setText("");
       }
@@ -66,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     EditText editTextInsertTask = findViewById(R.id.editTextInsertTask);
 
     outState.putString("edit text content", editTextInsertTask.getText().toString());
-    outState.putSerializable("holder", this.holder);
+    outState.putSerializable("dataBase", this.dataBase);
   }
 }
 

@@ -1,11 +1,13 @@
 package exercise.android.reemh.todo_items;
 
+import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveData;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-
-// TODO: feel free to add/change/remove methods as you want
-public interface TodoItemsHolder extends Serializable {
+public interface TodoItemsDataBase extends Serializable {
 
   /** Get a copy of the current items list */
   ArrayList<TodoItem> getCurrentItems();
@@ -22,6 +24,9 @@ public interface TodoItemsHolder extends Serializable {
   /** mark the @param item as IN-PROGRESS */
   void markItemInProgress(TodoItem item);
 
+  /** change the @itemId item's description to the given @param newDescription */
+  void editItem(String itemId, String newDescription);
+
   /** delete the @param item */
   void deleteItem(TodoItem item);
 
@@ -30,4 +35,11 @@ public interface TodoItemsHolder extends Serializable {
 
   /** return the first item with the @param description */
   TodoItem getItemByDesc(String description);
+
+  /** return an item by the @param id */
+  @Nullable TodoItem getById(String id);
+
+  /** get LiveData object */
+  LiveData<List<TodoItem>> getItemsLiveData();
+
 }

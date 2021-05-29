@@ -1,13 +1,13 @@
 package exercise.android.reemh.todo_items;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.viewHolder> {
 
     Context context;
-    TodoItemsHolderImpl todoItems;
+    TodoItemsDataBaseImpl todoItems;
 
-    public TodoItemsAdapter(Context c, TodoItemsHolderImpl items) {
+    public TodoItemsAdapter(Context c, TodoItemsDataBaseImpl items) {
         context = c;
         todoItems = items;
     }
@@ -69,6 +69,15 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.view
             }
         });
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentToEditItem = new Intent(context, EditTodoItemActivity.class);
+                intentToEditItem.putExtra("item_id", item.getId());
+                context.startActivity(intentToEditItem);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     /**
@@ -83,21 +92,11 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.view
 
         CheckBox checkBox;
         Button deleteButton;
-        boolean isDone;
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
             checkBox = itemView.findViewById(R.id.todoItemCheckBox);
             deleteButton = itemView.findViewById(R.id.deleteButton);
         }
-
-//        @Override
-//        public void setChecked(boolean checked) {
-//            if (v instanceof ImageView){
-//                mListener.onTomato((ImageView)v);
-//            } else {
-//                mListener.onPotato(v);
-//            }
-//        }
     }
 }

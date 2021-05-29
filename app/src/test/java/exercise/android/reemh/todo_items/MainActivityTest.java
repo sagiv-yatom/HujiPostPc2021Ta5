@@ -1,7 +1,6 @@
 package exercise.android.reemh.todo_items;
 
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,10 +15,8 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.LooperMode;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.robolectric.Shadows.shadowOf;
@@ -29,11 +26,11 @@ import static org.robolectric.Shadows.shadowOf;
 public class MainActivityTest extends TestCase {
 
   private ActivityController<MainActivity> activityController;
-  private TodoItemsHolder mockHolder;
+  private TodoItemsDataBase mockHolder;
 
   @Before
   public void setup(){
-    mockHolder = Mockito.mock(TodoItemsHolder.class);
+    mockHolder = Mockito.mock(TodoItemsDataBase.class);
     // when asking the `mockHolder` to get the current items, return an empty list
     Mockito.when(mockHolder.getCurrentItems())
       .thenReturn(new ArrayList<>());
@@ -42,7 +39,7 @@ public class MainActivityTest extends TestCase {
 
     // let the activity use our `mockHolder` as the TodoItemsHolder
     MainActivity activityUnderTest = activityController.get();
-    activityUnderTest.holder = mockHolder;
+    activityUnderTest.dataBase = mockHolder;
   }
 
   @Test

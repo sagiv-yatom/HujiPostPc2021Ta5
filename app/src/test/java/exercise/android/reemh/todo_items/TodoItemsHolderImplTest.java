@@ -1,7 +1,5 @@
 package exercise.android.reemh.todo_items;
 
-import junit.framework.TestCase;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,7 +7,7 @@ public class TodoItemsHolderImplTest {
   @Test
   public void when_addingTodoItem_then_callingListShouldHaveThisItem(){
     // setup
-    TodoItemsHolderImpl holderUnderTest = new TodoItemsHolderImpl();
+    TodoItemsDataBaseImpl holderUnderTest = new TodoItemsDataBaseImpl();
     Assert.assertEquals(0, holderUnderTest.getCurrentItems().size());
 
     // test
@@ -22,7 +20,7 @@ public class TodoItemsHolderImplTest {
   @Test
   public void when_adding2TodoItems_then_callingListShouldHaveTheseItems(){
     // setup
-    TodoItemsHolderImpl holderUnderTest = new TodoItemsHolderImpl();
+    TodoItemsDataBaseImpl holderUnderTest = new TodoItemsDataBaseImpl();
     Assert.assertEquals(0, holderUnderTest.getCurrentItems().size());
 
     // test
@@ -36,7 +34,7 @@ public class TodoItemsHolderImplTest {
   @Test
   public void when_addingTodoItem_then_itemShouldBeInTopOfTheList(){
     // setup
-    TodoItemsHolderImpl holderUnderTest = new TodoItemsHolderImpl();
+    TodoItemsDataBaseImpl holderUnderTest = new TodoItemsDataBaseImpl();
     Assert.assertEquals(0, holderUnderTest.getCurrentItems().size());
 
     // test
@@ -51,7 +49,7 @@ public class TodoItemsHolderImplTest {
   @Test
   public void when_changingItemStateToDone_then_itemShouldBeAfterInProgressItems(){
     // setup
-    TodoItemsHolderImpl holderUnderTest = new TodoItemsHolderImpl();
+    TodoItemsDataBaseImpl holderUnderTest = new TodoItemsDataBaseImpl();
     Assert.assertEquals(0, holderUnderTest.getCurrentItems().size());
 
     // test
@@ -68,7 +66,7 @@ public class TodoItemsHolderImplTest {
   @Test
   public void when_changingItemStateToInProgress_then_itemShouldReturnToItsOriginalIndex(){
     // setup
-    TodoItemsHolderImpl holderUnderTest = new TodoItemsHolderImpl();
+    TodoItemsDataBaseImpl holderUnderTest = new TodoItemsDataBaseImpl();
     Assert.assertEquals(0, holderUnderTest.getCurrentItems().size());
 
     // test
@@ -86,7 +84,7 @@ public class TodoItemsHolderImplTest {
   @Test
   public void when_changingAllItemsStateToInProgress_then_itemsShouldReturnToTheirOriginalIndexes(){
     // setup
-    TodoItemsHolderImpl holderUnderTest = new TodoItemsHolderImpl();
+    TodoItemsDataBaseImpl holderUnderTest = new TodoItemsDataBaseImpl();
     Assert.assertEquals(0, holderUnderTest.getCurrentItems().size());
 
     // test
@@ -106,7 +104,7 @@ public class TodoItemsHolderImplTest {
 
   public void when_deletingTodoItem_then_itemShouldBeDeletedSuccessfully(){
     // setup
-    TodoItemsHolderImpl holderUnderTest = new TodoItemsHolderImpl();
+    TodoItemsDataBaseImpl holderUnderTest = new TodoItemsDataBaseImpl();
     Assert.assertEquals(0, holderUnderTest.getCurrentItems().size());
 
     // test
@@ -121,7 +119,7 @@ public class TodoItemsHolderImplTest {
   @Test
   public void when_addingTodoItemAndMarkItAsDone_then_itemShouldBeAfterItemInProgress(){
     // setup
-    TodoItemsHolderImpl holderUnderTest = new TodoItemsHolderImpl();
+    TodoItemsDataBaseImpl holderUnderTest = new TodoItemsDataBaseImpl();
     Assert.assertEquals(0, holderUnderTest.getCurrentItems().size());
 
     // test
@@ -137,7 +135,7 @@ public class TodoItemsHolderImplTest {
   @Test
   public void checkSequenceOfActions1(){
     // setup
-    TodoItemsHolderImpl holderUnderTest = new TodoItemsHolderImpl();
+    TodoItemsDataBaseImpl holderUnderTest = new TodoItemsDataBaseImpl();
     Assert.assertEquals(0, holderUnderTest.getCurrentItems().size());
 
     // test
@@ -158,7 +156,7 @@ public class TodoItemsHolderImplTest {
   @Test
   public void checkSequenceOfActions2(){
     // setup
-    TodoItemsHolderImpl holderUnderTest = new TodoItemsHolderImpl();
+    TodoItemsDataBaseImpl holderUnderTest = new TodoItemsDataBaseImpl();
     Assert.assertEquals(0, holderUnderTest.getCurrentItems().size());
 
     // test
@@ -183,7 +181,7 @@ public class TodoItemsHolderImplTest {
   @Test
   public void checkSequenceOfActions3(){
     // setup
-    TodoItemsHolderImpl holderUnderTest = new TodoItemsHolderImpl();
+    TodoItemsDataBaseImpl holderUnderTest = new TodoItemsDataBaseImpl();
     Assert.assertEquals(0, holderUnderTest.getCurrentItems().size());
 
     // test
@@ -205,7 +203,7 @@ public class TodoItemsHolderImplTest {
   @Test
   public void checkSequenceOfActions4(){
     // setup
-    TodoItemsHolderImpl holderUnderTest = new TodoItemsHolderImpl();
+    TodoItemsDataBaseImpl holderUnderTest = new TodoItemsDataBaseImpl();
     Assert.assertEquals(0, holderUnderTest.getCurrentItems().size());
 
     // test
